@@ -4,6 +4,9 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   flutter_inappwebview_windows
+  pdfx
+  permission_handler_windows
+  syncfusion_pdfviewer_windows
   url_launcher_windows
 )
 

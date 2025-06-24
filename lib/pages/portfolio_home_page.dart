@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/services.dart';
+import 'package:my_portfolio_app/pages/pdf_view_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:parallax_animation/parallax_animation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:html' as html;
 
 class PortfolioHomePage extends StatefulWidget {
   const PortfolioHomePage({super.key});
@@ -62,12 +63,23 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.picture_as_pdf, color: Colors.white),
-            onPressed: () => {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PdfViewerPage(assetPath: cvPath),
+                ),
+              );
+            },
             tooltip: 'View CV',
           ),
           IconButton(
             icon: const Icon(Icons.download, color: Colors.white),
-            onPressed: () => {},
+             onPressed: () {
+          html.AnchorElement anchor = html.AnchorElement(href: 'assets/pdf/Abeer_Cherif_cv.pdf')
+            ..setAttribute('download', 'Abir_Cherif_CV.pdf')
+            ..click();
+        },
             tooltip: 'Download CV',
           ),
         ],
@@ -220,7 +232,15 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                           children: [
                             ElasticIn(
                               child: ElevatedButton.icon(
-                                onPressed: () => {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          PdfViewerPage(assetPath: cvPath),
+                                    ),
+                                  );
+                                },
                                 icon: const Icon(Icons.visibility),
                                 label: const Text('View CV'),
                               ),
@@ -228,7 +248,11 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                             const SizedBox(width: 12),
                             ElasticIn(
                               child: ElevatedButton.icon(
-                                onPressed: () => {},
+                                onPressed: () {
+          html.AnchorElement anchor = html.AnchorElement(href: 'assets/pdf/Abeer_Cherif_cv.pdf')
+            ..setAttribute('download', 'Abir_Cherif_CV.pdf')
+            ..click();
+        },
                                 icon: const Icon(Icons.download),
                                 label: const Text('Download CV'),
                               ),
@@ -975,52 +999,6 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CVViewerScreen extends StatelessWidget {
-  final String cvUrl;
-
-  const CVViewerScreen({super.key, required this.cvUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    final WebViewController controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(cvUrl));
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'View CV',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.blue.shade900,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.download),
-            onPressed: () async {
-              try {
-                await DefaultCacheManager().downloadFile(cvUrl);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('CV downloaded successfully')),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error downloading CV: $e')),
-                );
-              }
-            },
-            tooltip: 'Download CV',
-          ),
-        ],
-      ),
-      body: WebViewWidget(controller: controller),
     );
   }
 }
