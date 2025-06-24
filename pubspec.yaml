@@ -40,7 +40,6 @@ dependencies:
   animate_do: ^4.2.0
   webview_flutter: ^4.10.0
   flutter_inappwebview: ^6.1.5
-  advance_pdf_viewer2: ^2.0.5+1
   flutter_cache_manager: ^3.4.1
   parallax_animation: ^0.0.3
   open_file: ^3.5.10

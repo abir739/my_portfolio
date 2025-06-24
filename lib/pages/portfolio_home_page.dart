@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart';
@@ -47,6 +48,29 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
     );
   }
 
+  void _downloadCV() {
+    if (kIsWeb) {
+      // For web deployment, use the full URL path to your PDF
+      html.AnchorElement anchor =
+          html.AnchorElement(href: 'assets/pdf/Abeer_Cherif_cv.pdf')
+            ..setAttribute('download', 'Abir_Cherif_CV.pdf')
+            ..click();
+    } else {
+      //  mobile/desktop download
+    }
+  }
+
+//  method for downloading portfolio
+  void _downloadPortfolio() {
+    if (kIsWeb) {
+      // You can create a PDF version of your portfolio or link to GitHub
+      html.AnchorElement anchor =
+          html.AnchorElement(href: 'https://github.com/abir739/Portfolio')
+            ..setAttribute('target', '_blank')
+            ..click();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,11 +99,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
           ),
           IconButton(
             icon: const Icon(Icons.download, color: Colors.white),
-             onPressed: () {
-          html.AnchorElement anchor = html.AnchorElement(href: 'assets/pdf/Abeer_Cherif_cv.pdf')
-            ..setAttribute('download', 'Abir_Cherif_CV.pdf')
-            ..click();
-        },
+            onPressed: () => _downloadCV(),
             tooltip: 'Download CV',
           ),
         ],
@@ -248,11 +268,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                             const SizedBox(width: 12),
                             ElasticIn(
                               child: ElevatedButton.icon(
-                                onPressed: () {
-          html.AnchorElement anchor = html.AnchorElement(href: 'assets/pdf/Abeer_Cherif_cv.pdf')
-            ..setAttribute('download', 'Abir_Cherif_CV.pdf')
-            ..click();
-        },
+                                onPressed: () => _downloadCV(),
                                 icon: const Icon(Icons.download),
                                 label: const Text('Download CV'),
                               ),
@@ -613,15 +629,6 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                       url: 'https://github.com/abir739/Quiz_App',
                       image: 'assets/images/quiz_app.png',
                     ),
-                    // const SizedBox(height: 16),
-                    // _buildProjectCard(
-                    //   title: 'Document Archiving Web App',
-                    //   description:
-                    //       'A PHP and Laravel-based web app for document management, optimized to reduce load times by 25%.',
-                    //   url:
-                    //       'https://github.com/abir739/Document_Archiving_Web_App',
-                    //   image: 'assets/images/document_app.png',
-                    // ),
                   ],
                 ),
               ),
@@ -704,9 +711,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                     ),
                     const SizedBox(height: 12),
                     ElevatedButton.icon(
-                      onPressed: () => _launchUrl(
-                          'https://your-cloud-hosted-portfolio-url.com/portfolio.pdf',
-                          context), // Replace with actual portfolio PDF URL
+                      onPressed: () => _downloadPortfolio(),
                       icon: const Icon(Icons.download),
                       label: const Text('Download Portfolio'),
                       style: ElevatedButton.styleFrom(
