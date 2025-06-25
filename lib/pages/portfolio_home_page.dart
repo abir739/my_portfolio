@@ -65,7 +65,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
     if (kIsWeb) {
       // You can create a PDF version of your portfolio or link to GitHub
       html.AnchorElement anchor =
-          html.AnchorElement(href: 'https://github.com/abir739/Portfolio')
+          html.AnchorElement(href: 'https://abir739.github.io/my_portfolio/')
             ..setAttribute('target', '_blank')
             ..click();
     }
@@ -554,16 +554,18 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                     const SizedBox(height: 12),
                     _buildProjectReleasedCard(
                       'Sunshine Vacances',
-                      'A Flutter-based travel app for managing claims, accommodations, and transfers, using Firebase, HTTP, and REST APIs. Over 10,000 downloads on Play Store.',
-                      'https://play.google.com/store/apps/details?id=com.zenify_client_app',
+                      'A Flutter-based travel app for managing claims, accommodations, and transfers, using Firebase, HTTP, and REST APIs. Published on Play Store and App Store.',
+                      // 'https://play.google.com/store/apps/details?id=com.zenify_client_app',
+                      'https://play.google.com/store/apps/developer?id=SunshineVacances.fr',
                       context,
                       image: 'assets/images/sunshine.png',
                     ),
                     const SizedBox(height: 16),
                     _buildProjectReleasedCard(
                       'Tunisie Promo',
-                      'A mobile app for discovering promotions in Tunisia, built with Flutter and integrated with Firebase. Published on Play Store with 5,000+ downloads.',
-                      'https://play.google.com/store/search?q=tunisie%20promo&c=apps',
+                      'A mobile app for discovering promotions in Tunisia, built with Flutter and integrated with Firebase. Published on Play Store and App Store.',
+                      // 'https://play.google.com/store/search?q=tunisie%20promo&c=apps',
+                      'https://play.google.com/store/apps/dev?id=7728432506457419444',
                       context,
                       image: 'assets/images/tunisie_promo.png',
                     ),
